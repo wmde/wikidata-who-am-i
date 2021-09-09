@@ -1,5 +1,7 @@
 <template>
 	<div id="app">
+    <h1>Wikidata Who am I?</h1>
+    A secret item has been generated. Ask the right questions to find out who you are!
 		<Question @evaluate="evaluateQuestion"/>
 		<Answer
 			:secret="secret"
@@ -20,7 +22,6 @@ const listOfPossibleSecrets = [
     'Q42', // Douglas Adams
     'Q937', // Albert Einstein
     'Q567', // Angela Merkel
-    'Q52', // Wikipedia
     'Q10943' // cheese
 ]
 

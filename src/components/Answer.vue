@@ -1,10 +1,17 @@
 <template>
-	<div :class="{ 'is-true': isCorrect, 'is-false': isCorrect === false }">
-		{{ property.label }} {{ value.label }}
+	<div class="answer">
+    <div :class= "{ 'is-true': isCorrect, 'is-false': isCorrect === false }">
+    <Message :type="notice">
+      {{ property.label }} {{ value.label }}
+    </Message>
 	</div>
+  </div>
+
 </template>
 
 <script>
+
+import { Message } from '@wmde/wikit-vue-components';
 
 class SPARQLQueryDispatcher {
 	constructor( endpoint ) {
@@ -25,6 +32,7 @@ const queryDispatcher = new SPARQLQueryDispatcher( endpointUrl );
 
 export default {
 	name: 'Answer',
+  components: { Message },
 	props: ['property', 'value', 'secret'],
 	data() {
 		return {
@@ -45,10 +53,19 @@ export default {
 </script>
 
 <style scoped>
+
+.answer {
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+
 .is-true {
-	background: #0f0;
+	background: greenyellow;
+
 }
 .is-false {
-	background: #f00;
+	background: coral;
 }
 </style>

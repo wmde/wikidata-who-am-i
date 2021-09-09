@@ -1,30 +1,30 @@
 <template>
-  <div class="hello">
-   Question
-    <Dropdown
-        label="Property"
-        v-model="property"
-        :menu-items="properties"
-        placeholder="enter or select"
-    >
-    </Dropdown>
-    <Lookup
-        :search-input.sync="search"
-        label="item value"
-        v-model="value"
-        :menu-items="items"
-        placeholder="enter an item"
-    >
-      <template v-slot:no-results>
-        No match was found
-      </template>
-    </Lookup>
-    <Button
-		variant="primary"
-		type="progressive"
-		@click.native="evaluate"
-		:disabled="!property || !value"
-	>?</Button>
+  <div class="question">
+    <div class="form">
+      <Dropdown class="form-element"
+          v-model="property"
+          :menu-items="properties"
+          placeholder="select a property"
+      >
+      </Dropdown>
+      <Lookup class="form-element"
+          :search-input.sync="search"
+          v-model="value"
+          :menu-items="items"
+          placeholder="enter an item"
+      >
+        <template v-slot:no-results>
+          No match was found
+        </template>
+      </Lookup>
+
+    <Button class="form-element"
+      variant="primary"
+      type="progressive"
+      @click.native="evaluate"
+      :disabled="!property || !value"	> ? ? ?
+    </Button>
+    </div>
   </div>
 </template>
 
@@ -39,7 +39,10 @@ export default {
       property: null,
       search: '',
       value: null,
-      properties: [ { label: "is", id: 'P31' }, { label: "occupation", id: 'P106' } ],
+      properties: [
+          { label: "is", id: 'P31' },
+          { label: "occupation", id: 'P106' }
+      ],
       selectedItem: null,
     }
   },
@@ -72,6 +75,18 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.form{
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.form-element{
+  margin: 10px;
+}
+
 h3 {
   margin: 40px 0 0;
 }
