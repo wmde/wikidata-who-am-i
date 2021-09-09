@@ -1,17 +1,28 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Question />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Question from './components/Question';
+import '@wmde/wikit-vue-components/dist/wikit-vue-components.css';
+
+const listOfPossibleSecrets = [
+    'Q42', // Douglas Adams
+    'Q937', // Albert Einstein
+    'Q567', // Angela Merkel
+    'Q52', // Wikipedia
+    'Q10943' // cheese
+]
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Question,
+  },
+  created() {
+    this.secret = listOfPossibleSecrets[Math.floor(Math.random() * listOfPossibleSecrets.length)]
   }
 }
 </script>
