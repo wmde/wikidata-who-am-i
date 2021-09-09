@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Question />
+    <Question @evaluate="evaluateQuestion" />
   </div>
 </template>
 
@@ -23,6 +23,11 @@ export default {
   },
   created() {
     this.secret = listOfPossibleSecrets[Math.floor(Math.random() * listOfPossibleSecrets.length)]
+  },
+  methods: {
+    evaluateQuestion(... args) {
+      console.log(args)
+    }
   }
 }
 </script>

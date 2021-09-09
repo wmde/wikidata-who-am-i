@@ -11,7 +11,7 @@
     <Lookup
         :search-input.sync="search"
         label="item value"
-        v-model="selectedItem"
+        v-model="value"
         :menu-items="items"
         placeholder="enter an item"
     >
@@ -19,7 +19,7 @@
         No match was found
       </template>
     </Lookup>
-    <Button variant="primary" type="progressive" @click="evaluate">?</Button>
+    <Button variant="primary" type="progressive" @click.native="evaluate">?</Button>
   </div>
 </template>
 
@@ -34,7 +34,8 @@ export default {
       property: null,
       search: '',
       value: '',
-      properties: [ { label: "is" }, { label: "occupation" } ],
+      properties: [ { label: "is", id: 'P31' }, { label: "occupation", id: 'P106' } ],
+      selectedItem: null,
     }
   },
   computed: {
@@ -55,7 +56,8 @@ export default {
   },
   methods: {
     evaluate() {
-      this.$emit()
+      console.log(this.value)
+      this.$emit('evaluate', { property: this.property.id, value: this.value })
     }
   }
 }
