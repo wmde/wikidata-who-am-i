@@ -19,7 +19,12 @@
         No match was found
       </template>
     </Lookup>
-    <Button variant="primary" type="progressive" @click.native="evaluate">?</Button>
+    <Button
+		variant="primary"
+		type="progressive"
+		@click.native="evaluate"
+		:disabled="!property || !value"
+	>?</Button>
   </div>
 </template>
 
@@ -33,7 +38,7 @@ export default {
     return {
       property: null,
       search: '',
-      value: '',
+      value: null,
       properties: [ { label: "is", id: 'P31' }, { label: "occupation", id: 'P106' } ],
       selectedItem: null,
     }
@@ -56,9 +61,11 @@ export default {
   },
   methods: {
     evaluate() {
-      console.log(this.value)
-      this.$emit('evaluate', { property: this.property.id, value: this.value })
-    }
+		this.$emit( 'evaluate', { property: this.property, value: this.value } )
+		this.value = null;
+		this.search = '';
+		this.property = null;
+	}
   }
 }
 </script>

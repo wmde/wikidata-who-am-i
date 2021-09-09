@@ -1,10 +1,13 @@
 <template>
-  <div>Answer</div>
+	<div>
+		{{ property.label }} {{ value.label }}
+	</div>
 </template>
 
 <script>
 export default {
-  name: "Answer"
+	name: 'Answer',
+	props: ['property', 'value', 'secret'],
 }
 </script>
 

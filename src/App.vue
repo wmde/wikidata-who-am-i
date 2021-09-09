@@ -1,12 +1,20 @@
 <template>
-  <div id="app">
-    <Question @evaluate="evaluateQuestion" />
-  </div>
+	<div id="app">
+		<Question @evaluate="evaluateQuestion"/>
+		<Answer
+			:secret="secret"
+			:property="answer.property"
+			:value="answer.value"
+			v-for="( answer, i ) in answers"
+			:key="i"
+		/>
+	</div>
 </template>
 
 <script>
 import Question from './components/Question';
 import '@wmde/wikit-vue-components/dist/wikit-vue-components.css';
+import Answer from './components/Answer';
 
 const listOfPossibleSecrets = [
     'Q42', // Douglas Adams
@@ -17,18 +25,24 @@ const listOfPossibleSecrets = [
 ]
 
 export default {
-  name: 'App',
-  components: {
-    Question,
-  },
-  created() {
-    this.secret = listOfPossibleSecrets[Math.floor(Math.random() * listOfPossibleSecrets.length)]
-  },
-  methods: {
-    evaluateQuestion(... args) {
-      console.log(args)
-    }
-  }
+	name: 'App',
+	data: () => {
+		return {
+			answers: [],
+		}
+	},
+	components: {
+		Answer,
+		Question,
+	},
+	created() {
+		this.secret = listOfPossibleSecrets[ Math.floor( Math.random() * listOfPossibleSecrets.length ) ]
+	},
+	methods: {
+		evaluateQuestion( { property, value } ) {
+			this.answers.push( { property, value } );
+		},
+	},
 }
 </script>
 
