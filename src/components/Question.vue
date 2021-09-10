@@ -3,11 +3,13 @@
     <div class="form">
       <Dropdown class="form-element"
           v-model="property"
+          label="Property"
           :menu-items="properties"
           placeholder="select a property"
       >
       </Dropdown>
       <Lookup class="form-element"
+          label="Value"
           :search-input.sync="search"
           v-model="value"
           :menu-items="items"
@@ -18,7 +20,7 @@
         </template>
       </Lookup>
 
-    <Button class="form-element"
+    <Button class="form-element button"
       variant="primary"
       type="progressive"
       @click.native="evaluate"
@@ -89,18 +91,7 @@ export default {
   margin: 10px;
 }
 
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.button {
+	align-self: flex-end;
 }
 </style>

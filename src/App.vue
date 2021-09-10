@@ -3,7 +3,7 @@
     <h1>Wikidata Who am I?</h1>
     A secret item has been generated. Ask the right questions to find out who you are!
 		<Question @evaluate="evaluateQuestion"/>
-		<Guess :secret="secret" v-if="answers.length > 0" />
+		<Guess class="guess" :secret="secret" v-if="answers.length > 0" />
 		<Answer
 			:secret="secret"
 			:property="answer.property"
@@ -58,5 +58,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.guess {
+	margin-bottom: 20px;
 }
 </style>

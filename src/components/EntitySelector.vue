@@ -1,5 +1,6 @@
 <template>
 	<Lookup class="entity-selector"
+			:label="label"
 			:search-input.sync="search"
 			:valuel="value"
 			@input="$emit( 'input', $event )"
@@ -16,6 +17,7 @@ import { Lookup } from '@wmde/wikit-vue-components';
 
 export default {
 	name: 'EntitySelector',
+	props: [ 'label' ],
 	data() {
 		return {
 			search: '',

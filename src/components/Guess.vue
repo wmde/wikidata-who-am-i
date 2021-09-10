@@ -2,14 +2,14 @@
 	<div class="guess">
 		<Button v-if="!ready" @click.native="ready = true">I'm ready to guess!</Button>
 		<div class="enter-guess" v-else>
-			<EntitySelector @input="guess = $event" />
+			<EntitySelector label="Item" @input="guess = $event" />
 			<Button
 				variant="primary"
 				type="progressive"
 				@click.native="evaluateGuess"
 				:disabled="!guess"
 			>
-				Guess!
+				Make a guess!
 			</Button>
 		</div>
 	</div>
@@ -52,6 +52,7 @@ export default {
 }
 .enter-guess {
 	display: flex;
-	align-items: center;
+	gap: 20px;
+	align-items: flex-end;
 }
 </style>
