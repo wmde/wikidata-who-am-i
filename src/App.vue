@@ -5,8 +5,8 @@
     <Secrets
         :listOfPossibleSecrets = "listOfPossibleSecrets"
     ></Secrets>
-		<Question @evaluate="addPropValueAnswer" @evaluateSparql="addSparqlAnswer" />
-		<Guess class="guess" @guess="addGuessAnswer" v-if="questions.length > 0" />
+		<Question @evaluate="addPropValueQuestion" @evaluateSparql="addSparqlQuestion" />
+		<Guess class="guess" @guess="addGuessQuestion" v-if="questions.length > 0" />
 		<div
 			v-for="( question, i ) in reversedQuestions"
 			:key="i"
@@ -76,13 +76,13 @@ export default {
 		},
 	},
 	methods: {
-		addPropValueAnswer( { property, value } ) {
+		addPropValueQuestion( { property, value } ) {
 			this.questions.push( { type: 'normal', property, value } );
 		},
-		addSparqlAnswer( sparql ) {
+		addSparqlQuestion( sparql ) {
 			this.questions.push( { type: 'sparql', sparql } );
 		},
-		addGuessAnswer( guess ) {
+		addGuessQuestion( guess ) {
 			this.questions.push( { type: 'guess', guess } );
 		},
 	},
