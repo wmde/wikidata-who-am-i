@@ -8,17 +8,11 @@
 				placeholder="select a property"
 			>
 			</Dropdown>
-			<Lookup class="form-element"
+			<EntitySelector class="form-element"
 					label="Value"
-					:search-input.sync="search"
-					v-model="value"
-					:menu-items="items"
-					placeholder="enter an item"
+					@input="value = $event"
 			>
-				<template v-slot:no-results>
-					No match was found
-				</template>
-			</Lookup>
+			</EntitySelector>
 
 			<Button class="form-element button"
 					variant="primary"
@@ -47,45 +41,24 @@
 </template>
 
 <script>
-import { Button, Dropdown, Lookup, TextInput } from '@wmde/wikit-vue-components';
+import { Button, Dropdown, TextInput } from '@wmde/wikit-vue-components';
+import EntitySelector from './EntitySelector';
 
 export default {
 	name: 'Question',
-	components: { TextInput, Button, Dropdown, Lookup },
+	components: { EntitySelector, TextInput, Button, Dropdown },
 	data: () => {
 		return {
 			property: null,
-			search: '',
 			value: null,
 			properties: [
 				{ label: 'is', id: 'P31' },
 				{ label: 'occupation', id: 'P106' },
 				{ label: 'gender', id: 'P21' },
 			],
-			selectedItem: null,
 			expertMode: false,
 			sparql: '',
 		}
-	},
-	computed: {
-		items() {
-			// API things with this.search
-			// wbsearchentities
-
-			const predefinedItems = [
-				{ id: 'Q5', label: 'human' },
-				{ id: 'Q901', label: 'scientist' },
-				{ id: 'Q95074', label: 'fictional character' },
-				{ id: 'Q82955', label: 'politician' },
-				{ id: 'Q2095', label: 'food' },
-				{ id: 'Q6581072', label: 'female' },
-				{ id: 'Q6581097', label: 'male' },
-				{ id: 'Q5482740', label: 'programmer' },
-				{ id: 'Q488205', label: 'singer-songwriter' },
-			];
-
-			return predefinedItems.filter( ( item ) => item.label.includes( this.search ) );
-		},
 	},
 	methods: {
 		evaluate() {
