@@ -2,7 +2,7 @@
 	<Lookup class="entity-selector"
 			:label="label"
 			:search-input.sync="search"
-			:valuel="value"
+			:value="value"
 			@input="$emit( 'input', $event )"
 			:menu-items="entities"
 	>
@@ -17,11 +17,10 @@ import { Lookup } from '@wmde/wikit-vue-components';
 
 export default {
 	name: 'EntitySelector',
-	props: [ 'label', 'type' ],
+	props: [ 'label', 'type', 'value' ],
 	data() {
 		return {
 			search: '',
-			value: null,
 			entities: []
 		}
 	},
@@ -32,6 +31,11 @@ export default {
 			) ).json();
 
 			this.entities = searchResults.search;
+		},
+		value( value ) {
+			if ( value === null ) { // empty the input when the value is cleared
+				this.search = '';
+			}
 		},
 	},
 	components: {
