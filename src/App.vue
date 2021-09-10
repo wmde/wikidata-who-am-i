@@ -40,9 +40,15 @@ export default {
 		return {
 			listOfPossibleSecrets: [
 				'Q42', // Douglas Adams
+				'Q1744', // Madonna
 				'Q937', // Albert Einstein
+				'Q7810', // Homer Simpson
 				'Q567', // Angela Merkel
+				'Q79015', // Superman
+				'Q692', // Shakespeare
+				'Q7259', // Ada Lovelace
 				'Q10943', // cheese
+				'Q5383', // David Bowie
 			],
 			questions: [],
 		}
