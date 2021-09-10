@@ -2,6 +2,9 @@
 	<div id="app">
     <h1>Wikidata Who am I?</h1>
     A secret item has been generated. Ask the right questions to find out who you are!
+    <Secrets
+        :listOfPossibleSecrets = "listOfPossibleSecrets"
+    ></Secrets>
 		<Question @evaluate="evaluateQuestion"/>
 		<Answer
 			:secret="secret"
@@ -14,30 +17,33 @@
 </template>
 
 <script>
+import Secrets from "./components/Secrets";
 import Question from './components/Question';
-import '@wmde/wikit-vue-components/dist/wikit-vue-components.css';
 import Answer from './components/Answer';
+import '@wmde/wikit-vue-components/dist/wikit-vue-components.css';
 
-const listOfPossibleSecrets = [
-    'Q42', // Douglas Adams
-    'Q937', // Albert Einstein
-    'Q567', // Angela Merkel
-    'Q10943' // cheese
-]
+
 
 export default {
 	name: 'App',
 	data: () => {
 		return {
 			answers: [],
+      listOfPossibleSecrets : [
+        'Q42', // Douglas Adams
+        'Q937', // Albert Einstein
+        'Q567', // Angela Merkel
+        'Q10943' // cheese
+      ]
 		}
 	},
 	components: {
+    Secrets,
 		Answer,
 		Question,
 	},
 	created() {
-		this.secret = listOfPossibleSecrets[ Math.floor( Math.random() * listOfPossibleSecrets.length ) ]
+		this.secret = this.listOfPossibleSecrets[ Math.floor( Math.random() * this.listOfPossibleSecrets.length ) ]
 	},
 	methods: {
 		evaluateQuestion( { property, value } ) {

@@ -9,22 +9,9 @@
 <script>
 
 import { Message } from '@wmde/wikit-vue-components';
-
-class SPARQLQueryDispatcher {
-	constructor( endpoint ) {
-		this.endpoint = endpoint;
-	}
-
-	query( sparqlQuery ) {
-		const fullUrl = this.endpoint + '?query=' + encodeURIComponent( sparqlQuery );
-		const headers = { 'Accept': 'application/sparql-results+json' };
-
-		return fetch( fullUrl, { headers } ).then( body => body.json() );
-	}
-}
+import { SPARQLQueryDispatcher } from "./SPARQLQueryDispatcher";
 
 const endpointUrl = 'https://query.wikidata.org/sparql';
-
 const queryDispatcher = new SPARQLQueryDispatcher( endpointUrl );
 
 export default {
