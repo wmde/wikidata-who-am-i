@@ -8,8 +8,8 @@
 		<Question @evaluate="addPropValueQuestion" @evaluateSparql="addSparqlQuestion" />
 		<Guess class="guess" @guess="addGuessQuestion" v-if="questions.length > 0" />
 		<div
-			v-for="( question, i ) in reversedQuestions"
-			:key="i"
+			v-for="question in reversedQuestions"
+			:key="question.id"
 		>
 			<Answer
 				v-if="question.type === 'normal'"
@@ -77,13 +77,19 @@ export default {
 	},
 	methods: {
 		addPropValueQuestion( { property, value } ) {
-			this.questions.push( { type: 'normal', property, value } );
+			this.addQuestion( { type: 'normal', property, value } );
 		},
 		addSparqlQuestion( sparql ) {
-			this.questions.push( { type: 'sparql', sparql } );
+			this.addQuestion( { type: 'sparql', sparql } );
 		},
 		addGuessQuestion( guess ) {
-			this.questions.push( { type: 'guess', guess } );
+			this.addQuestion( { type: 'guess', guess } );
+		},
+		addQuestion( question ) {
+			this.questions.push( {
+				id: Math.random(), // to avoid re-rendering
+				...question,
+			} )
 		},
 	},
 }
