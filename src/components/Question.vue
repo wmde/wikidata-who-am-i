@@ -22,7 +22,9 @@
       variant="primary"
       type="progressive"
       @click.native="evaluate"
-      :disabled="!property || !value"	> ? ? ?
+      :disabled="!property || !value"
+	>
+		? ? ?
     </Button>
     </div>
   </div>

@@ -3,6 +3,7 @@
     <h1>Wikidata Who am I?</h1>
     A secret item has been generated. Ask the right questions to find out who you are!
 		<Question @evaluate="evaluateQuestion"/>
+		<Guess :secret="secret" v-if="answers.length > 0" />
 		<Answer
 			:secret="secret"
 			:property="answer.property"
@@ -17,6 +18,7 @@
 import Question from './components/Question';
 import '@wmde/wikit-vue-components/dist/wikit-vue-components.css';
 import Answer from './components/Answer';
+import Guess from './components/Guess';
 
 const listOfPossibleSecrets = [
     'Q42', // Douglas Adams
@@ -33,6 +35,7 @@ export default {
 		}
 	},
 	components: {
+		Guess,
 		Answer,
 		Question,
 	},
