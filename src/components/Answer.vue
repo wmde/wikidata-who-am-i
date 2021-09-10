@@ -25,7 +25,7 @@ export default {
 	created() {
 		const query = `ASK {
 		BIND( wd:${ this.secret } AS ?secret )
-		?secret wdt:${ this.propertyInQuery } wd:${ this.value.id } .
+		?secret wdt:${ this.property.id } wd:${ this.value.id } .
 		}`;
 
 		queryDispatcher.query( query ).then( ( { boolean } ) => {
@@ -40,16 +40,6 @@ export default {
 			}
 
 			return this.isCorrect ? 'success' : 'error';
-		},
-		propertyInQuery() {
-			if ( // this is a bit evil
-				this.property.id === 'P31' ||
-				this.property.id === 'P106'
-			) {
-				return this.property.id + '/wdt:P279*';
-			}
-
-			return this.property.id;
 		},
 	}
 }
