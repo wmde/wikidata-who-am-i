@@ -46,11 +46,4 @@ export default {
 </script>
 
 <style scoped>
-
-.answer {
-  padding-left: 10%;
-  padding-right: 10%;
-  padding-bottom: 5px;
-  font-weight: bold;
-}
 </style>

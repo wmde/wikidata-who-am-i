@@ -97,4 +97,11 @@ export default {
 .guess {
 	margin-bottom: 20px;
 }
+
+.answer {
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-bottom: 5px;
+	font-weight: bold;
+}
 </style>
