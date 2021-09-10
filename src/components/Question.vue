@@ -3,12 +3,15 @@
 		<div class="form" v-if="!expertMode">
 			<EntitySelector class="form-element"
 				label="Property"
+        :error="{message:'Warning message', type:'warning'}"
+        placeholder="e.g. instance of"
 				type="property"
 				:value="property"
 				@input="property = $event"
 			/>
 			<EntitySelector class="form-element"
 					label="Value"
+          placeholder="e.g. fictional character"
 					type="item"
 					:value="value"
 					@input="value = $event"

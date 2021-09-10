@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
-    <h1>Wikidata Who am I?</h1>
-    A secret item has been generated. Ask the right questions to find out who you are!
+    <h1>Wikidata, who am I<img src="./assets/logo.svg" width="50px" height="50px"></h1>
+    Your secret identity has been generated. Ask the right questions to find out who you are! <a href="https://github.com/wmde/wikidata-who-am-i"><img src="./assets/github.svg" target="_blank" width="11px"></a>
     <Secrets
         :listOfPossibleSecrets = "listOfPossibleSecrets"
     ></Secrets>
@@ -55,6 +55,7 @@ export default {
 				'Q7259', // Ada Lovelace
 				'Q10943', // cheese
 				'Q5383', // David Bowie
+        'Q3735317', // Mary Poppins
 			],
 			questions: [],
 		}

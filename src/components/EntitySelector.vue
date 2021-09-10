@@ -1,6 +1,7 @@
 <template>
 	<Lookup class="entity-selector"
 			:label="label"
+      :placeholder="placeholder"
 			:search-input.sync="search"
 			:value="value"
 			@input="$emit( 'input', $event )"
@@ -18,7 +19,7 @@ import debounce from 'debounce';
 
 export default {
 	name: 'EntitySelector',
-	props: [ 'label', 'type', 'value' ],
+	props: [ 'label', 'type', 'value', 'placeholder' ],
 	data() {
 		return {
 			search: '',
