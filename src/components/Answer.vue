@@ -1,12 +1,9 @@
 <template>
 	<div class="answer">
-    <div :class= "{ 'is-true': isCorrect, 'is-false': isCorrect === false }">
-    <Message :type="notice">
-      {{ property.label }} {{ value.label }}
-    </Message>
+		<Message :type="answerMessageType">
+			{{ property.label }} {{ value.label }}
+		</Message>
 	</div>
-  </div>
-
 </template>
 
 <script>
@@ -32,8 +29,8 @@ const queryDispatcher = new SPARQLQueryDispatcher( endpointUrl );
 
 export default {
 	name: 'Answer',
-  components: { Message },
-	props: ['property', 'value', 'secret'],
+	components: { Message },
+	props: [ 'property', 'value', 'secret' ],
 	data() {
 		return {
 			isCorrect: null,
@@ -41,14 +38,24 @@ export default {
 	},
 	created() {
 		const query = `ASK {
-		BIND( wd:${this.secret} AS ?secret )
-		?secret wdt:${this.property.id} wd:${this.value.id} .
+		BIND( wd:${ this.secret } AS ?secret )
+		?secret wdt:${ this.property.id } wd:${ this.value.id } .
 		}`;
 
 		queryDispatcher.query( query ).then( ( { boolean } ) => {
 			this.isCorrect = boolean;
 		} );
 	},
+
+	computed: {
+		answerMessageType() {
+			if ( this.isCorrect === null ) {
+				return 'notice';
+			}
+
+			return this.isCorrect ? 'success' : 'error';
+		},
+	}
 }
 </script>
 
@@ -59,13 +66,5 @@ export default {
   padding-right: 10%;
   padding-bottom: 5px;
   font-weight: bold;
-}
-
-.is-true {
-	background: greenyellow;
-
-}
-.is-false {
-	background: coral;
 }
 </style>
