@@ -4,11 +4,13 @@
 			<EntitySelector class="form-element"
 				label="Property"
 				type="property"
+				:value="property"
 				@input="property = $event"
 			/>
 			<EntitySelector class="form-element"
 					label="Value"
 					type="item"
+					:value="value"
 					@input="value = $event"
 			>
 			</EntitySelector>
@@ -59,7 +61,6 @@ export default {
 			this.$emit( 'evaluate', { property: this.property, value: this.value } )
 			this.value = null;
 			this.search = '';
-			this.property = null;
 		},
 		evaluateSparql() {
 			this.$emit( 'evaluateSparql', this.sparql )
