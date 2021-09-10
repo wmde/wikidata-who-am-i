@@ -1,15 +1,14 @@
 <template>
 	<div class="question">
 		<div class="form" v-if="!expertMode">
-			<Dropdown class="form-element"
-				v-model="property"
+			<EntitySelector class="form-element"
 				label="Property"
-				:menu-items="properties"
-				placeholder="select a property"
-			>
-			</Dropdown>
+				type="property"
+				@input="property = $event"
+			/>
 			<EntitySelector class="form-element"
 					label="Value"
+					type="item"
 					@input="value = $event"
 			>
 			</EntitySelector>
@@ -41,21 +40,16 @@
 </template>
 
 <script>
-import { Button, Dropdown, TextInput } from '@wmde/wikit-vue-components';
+import { Button, TextInput } from '@wmde/wikit-vue-components';
 import EntitySelector from './EntitySelector';
 
 export default {
 	name: 'Question',
-	components: { EntitySelector, TextInput, Button, Dropdown },
+	components: { EntitySelector, TextInput, Button },
 	data: () => {
 		return {
 			property: null,
 			value: null,
-			properties: [
-				{ label: 'is', id: 'P31' },
-				{ label: 'occupation', id: 'P106' },
-				{ label: 'gender', id: 'P21' },
-			],
 			expertMode: false,
 			sparql: '',
 		}
