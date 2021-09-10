@@ -50,43 +50,43 @@
 import { Button, Dropdown, Lookup, TextInput } from '@wmde/wikit-vue-components';
 
 export default {
-  name: 'Question',
-  components: { TextInput, Button, Dropdown, Lookup },
-  data: () => {
-    return {
-      property: null,
-      search: '',
-      value: null,
-      properties: [
-          { label: "is", id: 'P31' },
-          { label: "occupation", id: 'P106' },
-	  { label: "gender", id: 'P21' }
-      ],
-      selectedItem: null,
-      expertMode: false,
-      sparql: '',
-    }
-  },
-  computed: {
-    items() {
-      // API things with this.search
-      // wbsearchentities
+	name: 'Question',
+	components: { TextInput, Button, Dropdown, Lookup },
+	data: () => {
+		return {
+			property: null,
+			search: '',
+			value: null,
+			properties: [
+				{ label: 'is', id: 'P31' },
+				{ label: 'occupation', id: 'P106' },
+				{ label: 'gender', id: 'P21' },
+			],
+			selectedItem: null,
+			expertMode: false,
+			sparql: '',
+		}
+	},
+	computed: {
+		items() {
+			// API things with this.search
+			// wbsearchentities
 
-      const predefinedItems = [
-        { id: 'Q5', label: 'human' },
-        { id: 'Q901', label: 'scientist' },
-        { id: 'Q95074', label: 'fictional character' },
-        { id: 'Q82955', label: 'politician' },
-        { id: 'Q2095', label: 'food' },
-	{ id: 'Q6581072', label: 'female'},
-	{ id: 'Q6581097', label: 'male'},
-	{ id: 'Q5482740', label: 'programmer'},
-	{ id: 'Q488205', label: 'singer-songwriter'}
-      ];
+			const predefinedItems = [
+				{ id: 'Q5', label: 'human' },
+				{ id: 'Q901', label: 'scientist' },
+				{ id: 'Q95074', label: 'fictional character' },
+				{ id: 'Q82955', label: 'politician' },
+				{ id: 'Q2095', label: 'food' },
+				{ id: 'Q6581072', label: 'female' },
+				{ id: 'Q6581097', label: 'male' },
+				{ id: 'Q5482740', label: 'programmer' },
+				{ id: 'Q488205', label: 'singer-songwriter' },
+			];
 
-      return predefinedItems.filter( ( item ) => item.label.includes( this.search ) );
-    }
-  },
+			return predefinedItems.filter( ( item ) => item.label.includes( this.search ) );
+		},
+	},
 	methods: {
 		evaluate() {
 			this.$emit( 'evaluate', { property: this.property, value: this.value } )
