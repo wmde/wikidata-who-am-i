@@ -21,7 +21,6 @@ import EntitySelector from './EntitySelector';
 
 export default {
 	name: 'Guess',
-	props: [ 'secret' ],
 	data() {
 		return {
 			ready: false,
@@ -30,12 +29,7 @@ export default {
 	},
 	methods: {
 		evaluateGuess() {
-			if ( this.guess.id === this.secret ) {
-				alert( `Correct! You're ${ this.guess.label }!! 🎉️🎉️🎉️` );
-			} else {
-				alert( 'Nope, that\'s not who you are. Keep guessing!' );
-				this.ready = false;
-			}
+			this.$emit( 'guess', this.guess );
 		},
 	},
 	components: {

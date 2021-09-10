@@ -6,7 +6,7 @@
         :listOfPossibleSecrets = "listOfPossibleSecrets"
     ></Secrets>
 		<Question @evaluate="addPropValueAnswer" @evaluateSparql="addSparqlAnswer" />
-		<Guess class="guess" :secret="secret" v-if="questions.length > 0" />
+		<Guess class="guess" @guess="addGuessAnswer" v-if="questions.length > 0" />
 		<div
 			v-for="( question, i ) in questions"
 			:key="i"
@@ -22,6 +22,11 @@
 				:secret="secret"
 				:sparql="question.sparql"
 			/>
+			<GuessAnswer
+				v-if="question.type === 'guess'"
+				:secret="secret"
+				:guess="question.guess"
+			/>
 		</div>
 	</div>
 </template>
@@ -33,6 +38,7 @@ import Answer from './components/Answer';
 import '@wmde/wikit-vue-components/dist/wikit-vue-components.css';
 import Guess from './components/Guess';
 import SparqlAnswer from './components/SparqlAnswer';
+import GuessAnswer from './components/GuessAnswer';
 
 export default {
 	name: 'App',
@@ -54,6 +60,7 @@ export default {
 		}
 	},
 	components: {
+		GuessAnswer,
 		SparqlAnswer,
 		Secrets,
 		Guess,
@@ -69,6 +76,9 @@ export default {
 		},
 		addSparqlAnswer( sparql ) {
 			this.questions.push( { type: 'sparql', sparql } );
+		},
+		addGuessAnswer( guess ) {
+			this.questions.push( { type: 'guess', guess } );
 		},
 	},
 }
