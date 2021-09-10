@@ -5,15 +5,24 @@
     <Secrets
         :listOfPossibleSecrets = "listOfPossibleSecrets"
     ></Secrets>
-		<Question @evaluate="evaluateQuestion"/>
-		<Guess class="guess" :secret="secret" v-if="answers.length > 0" />
-		<Answer
-			:secret="secret"
-			:property="answer.property"
-			:value="answer.value"
-			v-for="( answer, i ) in answers"
+		<Question @evaluate="addPropValueAnswer" @evaluateSparql="addSparqlAnswer" />
+		<Guess class="guess" :secret="secret" v-if="questions.length > 0" />
+		<div
+			v-for="( question, i ) in questions"
 			:key="i"
-		/>
+		>
+			<Answer
+				v-if="question.type === 'normal'"
+				:secret="secret"
+				:property="question.property"
+				:value="question.value"
+			/>
+			<SparqlAnswer
+				v-if="question.type === 'sparql'"
+				:secret="secret"
+				:sparql="question.sparql"
+			/>
+		</div>
 	</div>
 </template>
 
@@ -23,22 +32,24 @@ import Question from './components/Question';
 import Answer from './components/Answer';
 import '@wmde/wikit-vue-components/dist/wikit-vue-components.css';
 import Guess from './components/Guess';
+import SparqlAnswer from './components/SparqlAnswer';
 
 export default {
 	name: 'App',
 	data: () => {
 		return {
-			answers: [],
-      listOfPossibleSecrets : [
-        'Q42', // Douglas Adams
-        'Q937', // Albert Einstein
-        'Q567', // Angela Merkel
-        'Q10943' // cheese
-      ]
+			listOfPossibleSecrets: [
+				'Q42', // Douglas Adams
+				'Q937', // Albert Einstein
+				'Q567', // Angela Merkel
+				'Q10943', // cheese
+			],
+			questions: [],
 		}
 	},
 	components: {
-    Secrets,
+		SparqlAnswer,
+		Secrets,
 		Guess,
 		Answer,
 		Question,
@@ -47,8 +58,11 @@ export default {
 		this.secret = this.listOfPossibleSecrets[ Math.floor( Math.random() * this.listOfPossibleSecrets.length ) ]
 	},
 	methods: {
-		evaluateQuestion( { property, value } ) {
-			this.answers.push( { property, value } );
+		addPropValueAnswer( { property, value } ) {
+			this.questions.push( { type: 'normal', property, value } );
+		},
+		addSparqlAnswer( sparql ) {
+			this.questions.push( { type: 'sparql', sparql } );
 		},
 	},
 }
