@@ -6,6 +6,7 @@
         :listOfPossibleSecrets = "listOfPossibleSecrets"
     ></Secrets>
 		<Question @evaluate="evaluateQuestion"/>
+		<Guess class="guess" :secret="secret" v-if="answers.length > 0" />
 		<Answer
 			:secret="secret"
 			:property="answer.property"
@@ -21,8 +22,7 @@ import Secrets from "./components/Secrets";
 import Question from './components/Question';
 import Answer from './components/Answer';
 import '@wmde/wikit-vue-components/dist/wikit-vue-components.css';
-
-
+import Guess from './components/Guess';
 
 export default {
 	name: 'App',
@@ -39,6 +39,7 @@ export default {
 	},
 	components: {
     Secrets,
+		Guess,
 		Answer,
 		Question,
 	},
@@ -61,5 +62,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.guess {
+	margin-bottom: 20px;
 }
 </style>

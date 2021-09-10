@@ -7,7 +7,6 @@
 </template>
 
 <script>
-
 import { Message } from '@wmde/wikit-vue-components';
 import { SPARQLQueryDispatcher } from "./SPARQLQueryDispatcher";
 
