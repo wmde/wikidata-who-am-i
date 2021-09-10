@@ -2,7 +2,7 @@
 	<div class="guess">
 		<Button v-if="!ready" @click.native="ready = true">I'm ready to guess!</Button>
 		<div class="enter-guess" v-else>
-			<EntitySelector label="Item" @input="guess = $event" />
+			<EntitySelector label="Item" @input="guess = $event" type="item" />
 			<Button
 				variant="primary"
 				type="progressive"

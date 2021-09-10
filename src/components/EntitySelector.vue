@@ -17,7 +17,7 @@ import { Lookup } from '@wmde/wikit-vue-components';
 
 export default {
 	name: 'EntitySelector',
-	props: [ 'label' ],
+	props: [ 'label', 'type' ],
 	data() {
 		return {
 			search: '',
@@ -26,8 +26,10 @@ export default {
 		}
 	},
 	watch: {
-		async search( newSearchString ) { // TODO debounce
-			const searchResults = await ( await fetch( `https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&search=${ newSearchString }&language=en&limit=10&origin=*` ) ).json();
+		async search( search ) { // TODO debounce
+			const searchResults = await ( await fetch(
+				`https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&search=${ search }&language=en&limit=10&origin=*&type=${ this.type }`
+			) ).json();
 
 			this.entities = searchResults.search;
 		},
