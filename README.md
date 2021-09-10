@@ -1,8 +1,9 @@
-# Wikidata Who am I
+# Wikidata, who am I?
 
 Guessing game using yes/no questions powered by Wikidata. Started during Ginger beer & cake event at 10th September 2021.
 
-![Screenshot from 2021-09-10 14-41-07](https://user-images.githubusercontent.com/7815226/132860323-368f4e59-adb5-46c9-a81b-f571e4db4189.png)
+![Screenshot from 2021-09-10 19-00-28](https://user-images.githubusercontent.com/7815226/132890586-9ecb6d37-c825-46e3-837a-c0ac44549335.png)
+
 
 ## Features
 
