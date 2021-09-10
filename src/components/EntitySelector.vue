@@ -14,6 +14,7 @@
 
 <script>
 import { Lookup } from '@wmde/wikit-vue-components';
+import debounce from 'debounce';
 
 export default {
 	name: 'EntitySelector',
@@ -25,13 +26,13 @@ export default {
 		}
 	},
 	watch: {
-		async search( search ) { // TODO debounce
+		search: debounce(async function ( search ) {
 			const searchResults = await ( await fetch(
 				`https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&search=${ search }&language=en&limit=10&origin=*&type=${ this.type }`
 			) ).json();
 
 			this.entities = searchResults.search;
-		},
+		}, 200 ),
 		value( value ) {
 			if ( value === null ) { // empty the input when the value is cleared
 				this.search = '';
