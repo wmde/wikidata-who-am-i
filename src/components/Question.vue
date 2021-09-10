@@ -59,7 +59,8 @@ export default {
       value: null,
       properties: [
           { label: "is", id: 'P31' },
-          { label: "occupation", id: 'P106' }
+          { label: "occupation", id: 'P106' },
+	  { label: "gender", id: 'P21' }
       ],
       selectedItem: null,
       expertMode: false,
@@ -77,6 +78,10 @@ export default {
         { id: 'Q95074', label: 'fictional character' },
         { id: 'Q82955', label: 'politician' },
         { id: 'Q2095', label: 'food' },
+	{ id: 'Q6581072', label: 'female'},
+	{ id: 'Q6581097', label: 'male'},
+	{ id: 'Q5482740', label: 'programmer'},
+	{ id: 'Q488205', label: 'singer-songwriter'}
       ];
 
       return predefinedItems.filter( ( item ) => item.label.includes( this.search ) );
