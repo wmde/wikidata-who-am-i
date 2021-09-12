@@ -18,14 +18,20 @@ export default {
   },
   async created() {
     this.images = ( await queryDispatcher.query(
-        `SELECT ?image ?item WHERE {
+        `SELECT ?thumb ?item WHERE {
         VALUES ?item { ${ this.listOfPossibleSecrets.map( i => 'wd:' + i ).join( ' ' ) } }
         ?item wdt:P18 ?image .
+
+        # hacky way to get a thumbnail from commons per https://stackoverflow.com/a/67332685
+        BIND(REPLACE(wikibase:decodeUri(STR(?image)), "http://commons.wikimedia.org/wiki/Special:FilePath/", "") as ?fileName) .
+        BIND(REPLACE(?fileName, " ", "_") as ?safeFileName)
+        BIND(MD5(?safeFileName) as ?fileNameMD5) .
+        BIND(CONCAT("https://upload.wikimedia.org/wikipedia/commons/thumb/", SUBSTR(?fileNameMD5, 1, 1), "/", SUBSTR(?fileNameMD5, 1, 2), "/", ?safeFileName, "/650px-", ?safeFileName) as ?thumb)
       }`
     ) ).results.bindings.map( ( row ) => {
       return {
         id: row.item.value,
-        url: row.image.value,
+        url: row.thumb.value,
       };
     } );
   }
@@ -34,7 +40,6 @@ export default {
 
 <style scoped>
 img{
-  width: 50px;
   height: 50px;
   padding: 5px;
 }
