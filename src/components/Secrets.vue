@@ -1,30 +1,35 @@
 <template>
   <div class="secrets">
-    <img :src="image" v-for="( image, i) in images" :key="i" alt="fdgf"/>
+    <img :src="url" v-for="{ id, url } in images" :key="id" :alt="id"/>
   </div>
 </template>
 
 <script>
-import {SPARQLQueryDispatcher} from "./SPARQLQueryDispatcher";
-
-export default {
-  name: "Secrets",
-  props: [ 'listOfPossibleSecrets' ],
-  data(){
-    return { images : [] }
-  },
-  async created() {
-     this.images = await Promise.all(this.listOfPossibleSecrets.map( async (item) => {
-           const response = await queryDispatcher.query(`SELECT ?img WHERE { wd:${item} wdt:P18 ?img }`);
-           return response.results.bindings[0].img.value;
-         }
-     ));
-  }
-}
+import { SPARQLQueryDispatcher } from "./SPARQLQueryDispatcher";
 
 const endpointUrl = 'https://query.wikidata.org/sparql';
 const queryDispatcher = new SPARQLQueryDispatcher( endpointUrl );
 
+export default {
+  name: 'Secrets',
+  props: [ 'listOfPossibleSecrets' ],
+  data() {
+    return { images : [] }
+  },
+  async created() {
+    this.images = ( await queryDispatcher.query(
+        `SELECT ?image ?item WHERE {
+        VALUES ?item { ${ this.listOfPossibleSecrets.map( i => 'wd:' + i ).join( ' ' ) } }
+        ?item wdt:P18 ?image .
+      }`
+    ) ).results.bindings.map( ( row ) => {
+      return {
+        id: row.item.value,
+        url: row.image.value,
+      };
+    } );
+  }
+}
 </script>
 
 <style scoped>
