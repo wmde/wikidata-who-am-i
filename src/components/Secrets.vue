@@ -40,6 +40,9 @@ export default {
 
 <style scoped>
 img{
+  width: 50px;
+  object-fit: cover;
+  object-position: center top;
   height: 50px;
   padding: 5px;
 }
